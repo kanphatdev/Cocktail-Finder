@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Wine } from "lucide-react";
 import { CocktailCardProps } from "@/interface/CocktailCard";
+import Link from "next/link";
 
 
 
@@ -19,9 +20,9 @@ export default function CocktailCard({ drink }: CocktailCardProps) {
       <div className="card-body">
         <h2 className="card-title text-lg">{drink.strDrink}</h2>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary btn-sm flex items-center gap-2">
+          <Link href={`drinks/${drink.idDrink}`} className="btn btn-primary btn-sm flex items-center gap-2">
             View Recipe <Wine size={16} />
-          </button>
+          </Link>
         </div>
         <div className="card-actions mt-2 flex-wrap gap-2">
           {drink.strCategory && (
