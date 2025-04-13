@@ -8,6 +8,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Wine } from "lucide-react";
 import { APIResponse } from "@/interface/APIResponse";
+import Navbar from "@/components/Navbar";
+import JoinAlcoholicButton from "@/components/JoinAlcoholicButton";
 
 const Cocktail = () => {
   const { data, error } = useSWR<APIResponse>(
@@ -16,13 +18,15 @@ const Cocktail = () => {
   );
 
   if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  if (!data) return <div className="animate-pulse text-xl text-center">Loading <span className="loading loading-dots loading-xs"></span></div>;
 
   return (
     <>
+    <Navbar />
       <div className="flex justify-between mx-4 mt-4">
-        <div>
+        <div className="flex items-center gap-2">
           <CategoryJoinButton />
+          <JoinAlcoholicButton />
         </div>
         <div>
           <Breadcrumbs />
