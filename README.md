@@ -24,3 +24,6 @@
 | eslint-config-next  | 15.3.0    |
 | tailwindcss         | ^4        |
 | typescript          | ^5        |
+## API Documentation
+
+For more information about the API used in this project, visit [TheCocktailDB API Documentation](https://www.thecocktaildb.com/api.php).
