@@ -1,10 +1,11 @@
 "use client";
-import JoinButton from "@/components/JoinButton";
+
 import { fetcher } from "@/functions/fetcher";
 import useSWR from "swr";
 import { useState } from "react";
 import CocktailCard from "@/components/CocktailCard";
 import AlphabetDropdown from "@/components/AlphabetDropdown";
+import CategoryJoinButton from "@/components/CategoryJoinButton";
 
 export default function Home() {
   const [selectedLetter, setSelectedLetter] = useState("a");
@@ -38,7 +39,7 @@ export default function Home() {
           🍸 Cocktail Finder
         </h1>
         <div className="flex gap-4 items-center">
-          <JoinButton />
+          <CategoryJoinButton />
           <AlphabetDropdown
             selectedLetter={selectedLetter}
             setSelectedLetter={setSelectedLetter}

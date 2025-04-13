@@ -3,10 +3,10 @@
 import { CupSoda, Wine } from "lucide-react";
 import Link from "next/link";
 
-const JoinButton = () => {
+const CategoryJoinButton = () => {
   return (
     <div className="join">
-      <Link href={""} className="btn btn-soft btn-primary join-item capitalize">
+      <Link href={"/ordinarydrinks"} className="btn btn-soft btn-primary join-item capitalize">
         <CupSoda />
         ordinary drinks
       </Link>
@@ -20,4 +20,4 @@ const JoinButton = () => {
     </div>
   );
 };
-export default JoinButton;
+export default CategoryJoinButton;
