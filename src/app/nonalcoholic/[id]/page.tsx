@@ -4,18 +4,23 @@ import { fetcher } from "@/functions/fetcher";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 import Image from "next/image";
+import Link from "next/link";
+import { Beer } from "lucide-react";
 
 const NonAlcoholicDetail = () => {
   const params = useParams();
   const drinkId = params?.id;
 
   const { data, error } = useSWR(
-    drinkId ? `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}` : null,
+    drinkId
+      ? `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`
+      : null,
     fetcher
   );
 
   if (error) return <div className="text-red-500 p-4">Failed to load</div>;
-  if (!data) return <div className="loading loading-spinner text-primary m-10" />;
+  if (!data)
+    return <div className="loading loading-spinner text-primary m-10" />;
 
   const drink = data.drinks?.[0];
 
@@ -37,40 +42,71 @@ const NonAlcoholicDetail = () => {
 
         {/* Details */}
         <div className="p-6 flex-1">
-          <h2 className="text-3xl font-bold text-primary mb-4">{drink.strDrink}</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-base-content">
-            <div>
-              <span className="font-semibold badge badge-soft badge-accent">{drink.strCategory}</span> 
+          <h2 className="text-3xl font-bold text-primary mb-4">
+            {drink.strDrink}
+          </h2>
+          <div className="card-actions justify-start">
+            <div className="badge badge-dash badge-primary">
+              {drink.strCategory}
             </div>
-            <div>
-            <span className="font-semibold badge badge-soft badge-info">
+            <div className="badge badge-dash badge-secondary">
               {drink.strAlcoholic}
-              </span>  
             </div>
-            <div>
-            <span className="font-semibold badge badge-soft badge-secondary">{drink.strGlass}</span>  
+            <div className="badge badge-dash badge-accent">
+              {drink.strGlass}
             </div>
             {drink.strTags && (
               <div>
-                <span className="font-semibold badge badge-soft badge-success">{drink.strTags}</span> 
+                <span className="badge badge-dash badge-info">
+                  {drink.strTags}
+                </span>
               </div>
             )}
             {drink.strIBA && (
               <div>
-                <span className="font-semibold badge badge-dash badge-primary">IBA:</span> {drink.strIBA}
+                <span className="badge badge-dash badge-success">
+                  {drink.strIBA}
+                </span>
               </div>
             )}
           </div>
 
+        
+
           <div className="divider mt-6 mb-2">Instructions</div>
 
-          <div className="space-y-2">
-            <p><span className="font-semibold">EN:</span> {drink.strInstructions}</p>
-            {drink.strInstructionsES && <p><span className="font-semibold">ES:</span> {drink.strInstructionsES}</p>}
-            {drink.strInstructionsDE && <p><span className="font-semibold">DE:</span> {drink.strInstructionsDE}</p>}
-            {drink.strInstructionsFR && <p><span className="font-semibold">FR:</span> {drink.strInstructionsFR}</p>}
-            {drink.strInstructionsIT && <p><span className="font-semibold">IT:</span> {drink.strInstructionsIT}</p>}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <fieldset className="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+              <legend className="fieldset-legend uppercase">en</legend>
+              <p className="fieldset-label">{drink.strInstructions}</p>
+            </fieldset>
+            {drink.strInstructionsES && (
+              <fieldset className="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend className="fieldset-legend uppercase">es</legend>
+                <p className="fieldset-label">{drink.strInstructionsES}</p>
+              </fieldset>
+            )}
+            {drink.strInstructionsDE && (
+              <fieldset className="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend className="fieldset-legend uppercase">de</legend>
+                <p className="fieldset-label">{drink.strInstructionsDE}</p>
+              </fieldset>
+            )}
+            {drink.strInstructionsFR && (
+              <fieldset className="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend className="fieldset-legend uppercase">fr</legend>
+                <p className="fieldset-label">{drink.strInstructionsFR}</p>
+              </fieldset>
+            )}
+            {drink.strInstructionsIT && (
+              <fieldset className="fieldset w-full bg-base-200 border border-base-300 p-4 rounded-box">
+                <legend className="fieldset-legend uppercase">it</legend>
+                <p className="fieldset-label">{drink.strInstructionsIT}</p>
+              </fieldset>
+            )}
+          </div>
+          <div className="card-actions justify-end">
+            <Link href={"."} className="btn btn-dash btn-accent capitalize">back steps <Beer /> </Link>
           </div>
         </div>
       </div>
